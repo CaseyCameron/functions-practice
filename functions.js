@@ -1,4 +1,3 @@
-export function getName(object) {
-  const { name } = object;
+export function getName({ name } = object) {
   return name;
 };
