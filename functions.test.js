@@ -7,6 +7,7 @@ describe('Get a name from an object', () => {
 
     const character = { _id: "5cf5679a915ecad153ab68c9", name: "Aang" };
     const actualTwo = getName(character);
+
     expect(actualOne).toEqual('spot');
     expect(actualTwo).toEqual('Aang');
   });
