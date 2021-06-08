@@ -1,7 +1,8 @@
 import {
   getName,
   copyAndPush,
-  capitalizeAndFilter
+  capitalizeAndFilter,
+  fetchQuotes
 } from './functions';
 
 describe('TDD practice', () => {
@@ -23,10 +24,23 @@ describe('TDD practice', () => {
     expect(actual).toEqual([numbers, [1, 2, 3, 4]]);
   });
 
-  it('capitalize & return an array of strings, but return none that begins with F/f', () => {
+  it.skip('capitalize & return an array of strings, but return none that begins with F/f', () => {
     const strings = ['hello', 'howdy', 'fine', 'Fabulous'];
     const actual = capitalizeAndFilter(strings);
 
     expect(actual).toEqual(['HELLO', 'HOWDY']);
   });
+
+  it('Grabs a single quote, name, and image from Futurama API', async () => {
+    const futuramaQuote = await fetchQuotes(2);
+
+    //expect(futuramaQuote.status).toBe(200);
+    expect(futuramaQuote).toEqual(
+      {
+        name: expect.any(String),
+        text: expect.any(String),
+        image: expect.any(String)
+      }
+    );
+  })
 });
