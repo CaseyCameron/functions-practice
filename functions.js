@@ -1,4 +1,5 @@
 import request from 'superagent';
+import fetch from 'node-fetch';
 
 export function getName({ name } = object) {
   return name;
@@ -35,4 +36,16 @@ export async function fetchQuotes(count) {
     console.log(err);
     res.status(500).json({ error: err.message });
   }
+}
+
+export function useFetchForQuotes(count) {
+  //const fetch = require('node-fetch');
+  return fetch(`http://futuramaapi.herokuapp.com/api/quotes/${count}`)
+    .then(res => res.json())
+    .then(console.log())
+    .then(data => ({
+      name: data[0].character,
+      text: data[0].quote,
+      image: data[0].image
+    }));
 }

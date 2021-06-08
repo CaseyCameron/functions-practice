@@ -2,7 +2,8 @@ import {
   getName,
   copyAndPush,
   capitalizeAndFilter,
-  fetchQuotes
+  fetchQuotes,
+  useFetchForQuotes
 } from './functions';
 
 describe('TDD practice', () => {
@@ -31,11 +32,23 @@ describe('TDD practice', () => {
     expect(actual).toEqual(['HELLO', 'HOWDY']);
   });
 
-  it('Grabs a single quote, name, and image from Futurama API', async () => {
+  it.skip('Grabs a single quote, name, and image from Futurama API', async () => {
     const futuramaQuote = await fetchQuotes(2);
 
     //expect(futuramaQuote.status).toBe(200);
     expect(futuramaQuote).toEqual(
+      {
+        name: expect.any(String),
+        text: expect.any(String),
+        image: expect.any(String)
+      }
+    );
+  })
+
+  it('Grabs a single quote, name, and image from Futurama API using fetch', async () => {
+    const data = await useFetchForQuotes(1);
+
+    expect(data).toEqual(
       {
         name: expect.any(String),
         text: expect.any(String),
