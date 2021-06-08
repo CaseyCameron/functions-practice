@@ -1,6 +1,7 @@
 import {
   getName,
-  copyAndPush
+  copyAndPush,
+  capitalizeAndFilter
 } from './functions';
 
 describe('TDD practice', () => {
@@ -15,10 +16,17 @@ describe('TDD practice', () => {
     expect(actualTwo).toEqual('Aang');
   });
 
-  it('return a new array with the original and new item @ end', () => {
+  it.skip('return a new array with the original and new item @ end', () => {
     const numbers = [1, 2, 3];
     const actual = copyAndPush(numbers, 4);
 
     expect(actual).toEqual([numbers, [1, 2, 3, 4]]);
+  });
+
+  it('capitalize & return an array of strings, but return none that begins with F/f', () => {
+    const strings = ['hello', 'howdy', 'fine', 'Fabulous'];
+    const actual = capitalizeAndFilter(strings);
+
+    expect(actual).toEqual(['HELLO', 'HOWDY']);
   });
 });
