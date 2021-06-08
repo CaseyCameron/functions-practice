@@ -10,11 +10,8 @@ export function copyAndPush(arr, num) {
 }
 
 export function capitalizeAndFilter(arr) {
-  const filteredArr = [];
+  let filteredArr = [];
   const regEx = /[fF]/g;
-  for (let i = 0; i < arr.length; i++) {
-    if (!arr[i][0].match(regEx))
-      filteredArr.push(arr[i].toUpperCase());
-  }
-  return filteredArr;
+  filteredArr = arr.filter(i => !i.charAt(0).match(regEx))
+  return filteredArr.map(i => i.toUpperCase());
 }
