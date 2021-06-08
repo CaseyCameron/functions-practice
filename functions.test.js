@@ -1,7 +1,10 @@
-import { getName } from './functions';
+import {
+  getName,
+  copyAndPush
+} from './functions';
 
-describe('Get a name from an object', () => {
-  it('This will grab the value of a name key', () => {
+describe('TDD practice', () => {
+  it.skip('This will grab the value of a name key', () => {
     const spot = { name: "spot", age: 5, weight: "20 lbs" };
     const actualOne = getName(spot);
 
@@ -10,5 +13,12 @@ describe('Get a name from an object', () => {
 
     expect(actualOne).toEqual('spot');
     expect(actualTwo).toEqual('Aang');
+  });
+
+  it('return a new array with the original and new item @ end', () => {
+    const numbers = [1, 2, 3];
+    const actual = copyAndPush(numbers, 4);
+
+    expect(actual).toEqual([1, 2, 3, 4]);
   });
 });
