@@ -19,6 +19,6 @@ describe('TDD practice', () => {
     const numbers = [1, 2, 3];
     const actual = copyAndPush(numbers, 4);
 
-    expect(actual).toEqual([1, 2, 3, 4]);
+    expect(actual).toEqual([numbers, [1, 2, 3, 4]]);
   });
 });
