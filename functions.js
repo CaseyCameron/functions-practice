@@ -39,7 +39,6 @@ export async function fetchQuotes(count) {
 }
 
 export function useFetchForQuotes(count) {
-  //const fetch = require('node-fetch');
   return fetch(`http://futuramaapi.herokuapp.com/api/quotes/${count}`)
     .then(res => res.json())
     .then(console.log())

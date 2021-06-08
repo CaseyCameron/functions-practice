@@ -3,8 +3,23 @@ import {
   copyAndPush,
   capitalizeAndFilter,
   fetchQuotes,
-  useFetchForQuotes
+  useFetchForQuotes,
 } from './functions';
+
+import { jest } from '@jest/globals';
+import fetch, { Response } from 'node-fetch';
+
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve(
+      {
+        name: 'Zapp Brannigan',
+        text: 'You remind me of a young me. Not much younger mind you; perhaps even a couple\nof years older.',
+        image: 'https://res.cloudinary.com/dzxqhkyqd/image/upload/v1554904049/Zapp_Brannigan.png'
+      }
+    )
+  })
+);
 
 describe('TDD practice', () => {
   it.skip('This will grab the value of a name key', () => {
@@ -45,7 +60,7 @@ describe('TDD practice', () => {
     );
   })
 
-  it('Grabs a single quote, name, and image from Futurama API using fetch', async () => {
+  it.skip('Grabs a single quote, name, and image from Futurama API using fetch', async () => {
     const data = await useFetchForQuotes(1);
 
     expect(data).toEqual(
@@ -56,4 +71,45 @@ describe('TDD practice', () => {
       }
     );
   })
+
+
+  it('OLD Mocks the futurama test with jest.mock', async () => {
+
+    const mock = await jest.fn()
+      .mockReturnValueOnce({
+        name: 'Zapp Brannigan',
+        text: 'You remind me of a young me. Not much younger mind you; perhaps even a couple\nof years older.',
+        image: 'https://res.cloudinary.com/dzxqhkyqd/image/upload/v1554904049/Zapp_Brannigan.png'
+      });
+
+    const result = mock();
+
+    expect(result).toStrictEqual(
+      {
+        name: expect.any(String),
+        text: expect.any(String),
+        image: expect.any(String)
+      }
+    );
+    expect(mock).toHaveBeenCalled();
+  })
+
+  // it('Mocks the futurama test with jest.mock', async () => {
+  //   fetch.mockReturnValueOnce(Promise.resolve(new Response(
+  //     {
+  //       name: 'Zapp Brannigan',
+  //       text: 'You remind me of a young me. Not much younger mind you; perhaps even a couple\nof years older.',
+  //       image: 'https://res.cloudinary.com/dzxqhkyqd/image/upload/v1554904049/Zapp_Brannigan.png'
+  //     }
+  //   )));
+
+  //   expect(fetch).toHaveBeenCalled();
+  //   expect(result).toStrictEqual(
+  //     {
+  //       name: expect.any(String),
+  //       text: expect.any(String),
+  //       image: expect.any(String)
+  //     }
+  //   );
+  // })
 });
